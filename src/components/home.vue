@@ -16,7 +16,7 @@
     </el-header>
     <el-container>
       <el-aside class="aside">
-        <el-menu unique-opened default-active="1-1">
+        <el-menu router unique-opened default-active="1">
           <!-- 1 -->
           <el-submenu index="1">
             <template slot="title">
@@ -24,7 +24,7 @@
               <span>用户管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">
+              <el-menu-item index="users">
                 <i class="el-icon-s-custom"></i>
                 用户列表
               </el-menu-item>
@@ -96,7 +96,9 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main class="mian">Main</el-main>
+      <el-main class="mian">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -109,7 +111,7 @@ export default {
       this.$message.success("请先登录")
       //跳转
       this.$router.push({
-        name: "login"
+        name: 'login'
       })
     }
   },

@@ -28,25 +28,23 @@ export default {
   },
   methods: {
     userLog() {
-      this.$http.post("login", this.formData).then(res => {
+      this.$http.post(`login`, this.formData).then(res => {
         //结构赋值
-        const {
-          data: {
-            meta: { msg, status }
-          },
-          data
-        } = res;
+        // console.log(res);
+        const {data: {meta: { msg, status },data}} = res;
         if (status === 200) {
+          //保存登陆成功后用户数据的唯一标识   后端接口返回的的数据data里面就有这个token
+          localStorage.setItem("token", data.token);
+          
           //登陆成功后页面的提示信息
+          // console.log(token)
           this.$message({
             message: msg,
             type: "success"
           });
           this.$router.push({
             name: "home"
-          })
-          //保存登陆成功后用户数据的唯一表示
-          localStorage.setItem("token",data.token)
+          });
         } else {
           this.$message({
             message: msg,
